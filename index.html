@@ -16,15 +16,15 @@
             flex-direction: column;
             text-align: center;
             overflow: hidden;
-            position: relative; /* Necesario para las fotos de las esquinas */
+            position: relative;
         }
 
-        /* --- ESTILOS NUEVOS PARA LAS FOTOS --- */
+        /* FOTOS DE LAS ESQUINAS */
         .corner-photo {
             position: absolute;
-            width: 130px; /* Tamaño de las fotos */
+            width: 130px; 
             height: auto;
-            border-radius: 15px; /* Bordes redondeados */
+            border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             border: 3px solid white;
             z-index: 1;
@@ -33,7 +33,7 @@
         .top-left {
             top: 30px;
             left: 30px;
-            transform: rotate(-8deg); /* Un pequeño giro para que se vea estilo polaroid */
+            transform: rotate(-8deg); 
         }
 
         .top-right {
@@ -42,7 +42,7 @@
             transform: rotate(8deg);
         }
 
-        /* Ajuste para celulares pequeños: hace las fotos más chicas para que no estorben */
+        /* Ajuste para celulares */
         @media (max-width: 600px) {
             .corner-photo {
                 width: 90px;
@@ -51,7 +51,6 @@
             .top-left { left: 15px; }
             .top-right { right: 15px; }
         }
-        /* ------------------------------------ */
 
         h1 {
             color: #d63384;
@@ -62,7 +61,7 @@
         }
 
         #main-content {
-            z-index: 2; /* Para que el texto y botones queden sobre las fotos si se cruzan */
+            z-index: 2; 
             position: relative;
         }
 
@@ -134,10 +133,8 @@
 </head>
 <body>
 
-    <img src="https://via.placeholder.com/150/ffcccb/d63384?text=Foto+Aqui" alt="Nosotros Izquierda" class="corner-photo top-left">
-    
-    <img src="https://via.placeholder.com/150/ffcccb/d63384?text=Foto+Aqui" alt="Nosotros Derecha" class="corner-photo top-right">
-
+    <img src="foto1.jpg" alt="Nosotros Izquierda" class="corner-photo top-left">
+    <img src="foto2.jpg" alt="Nosotros Derecha" class="corner-photo top-right">
 
     <div id="main-content">
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3R6eW55b2E4aHl4YjJ6YjJ6YjJ6YjJ6YjJ6YjJ6YjJ6eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0ThflsHCqDrG/giphy.gif" alt="Cute Gif" style="width: 200px; border-radius: 15px; margin-bottom: 20px;">
@@ -161,9 +158,6 @@
         const noBtn = document.getElementById('noBtn');
         const mainContent = document.getElementById('main-content');
         const message = document.getElementById('message');
-        // Seleccionamos también las fotos para ocultarlas al final si quieres (opcional)
-        const cornerPhotos = document.querySelectorAll('.corner-photo');
-
 
         const moveButton = () => {
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -178,8 +172,6 @@
 
         yesBtn.addEventListener('click', () => {
             mainContent.classList.add('hidden');
-            // Si quieres que las fotos de las esquinas desaparezcan al aceptar, descomenta la siguiente línea:
-            // cornerPhotos.forEach(photo => photo.classList.add('hidden'));
             message.classList.remove('hidden');
             createHearts();
         });
