@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti ❤️</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6e6; /* Fondo rosa suave */
+            font-family: 'Arial', sans-serif;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden; /* Evita barras de desplazamiento si el botón se mueve mucho */
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #e60026;
+        }
+
+        #noBtn {
+            background-color: #ffffff;
+            color: #ff4d6d;
+            border: 2px solid #ff4d6d;
+            position: relative; /* Necesario para moverlo */
+        }
+
+        /* Estilo para el mensaje final */
+        .hidden {
+            display: none;
+        }
+        
+        #message {
+            color: #d63384;
+            font-size: 2rem;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        /* Corazones flotantes (opcional) */
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            animation: float 4s linear infinite;
+            font-size: 20px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-content">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3R6eW55b2E4aHl4YjJ6YjJ6YjJ6YjJ6YjJ6YjJ6YjJ6eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0ThflsHCqDrG/giphy.gif" alt="Cute Gif" style="width: 200px; border-radius: 15px; margin-bottom: 20px;">
+        
+        <h1>bb quieres ser mi 14 de febrero? 🥺👉👈</h1>
+        
+        <div class="container">
+            <button id="yesBtn">¡Sí, obvio! 😍</button>
+            <button id="noBtn">No 😢</button>
+        </div>
+    </div>
+
+    <div id="message" class="hidden">
+        <h1>¡Sabía que dirías que sí! 💖🌹</h1>
+        <p>Te quiero mucho bb</p>
+        <img src="https://media.giphy.com/media/T86i6yDyOYz7J6v9uh/giphy.gif" alt="Celebration" style="width: 250px; border-radius: 15px;">
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const mainContent = document.getElementById('main-content');
+        const message = document.getElementById('message');
+
+        // Función para mover el botón "No" aleatoriamente
+        const moveButton = () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        };
+
+        // Evento cuando intentan hacer click o pasar el mouse sobre "No"
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('click', moveButton); // Por si están en celular
+
+        // Evento cuando dicen que sí
+        yesBtn.addEventListener('click', () => {
+            mainContent.classList.add('hidden');
+            message.classList.remove('hidden');
+            createHearts();
+        });
+
+        // Función decorativa para crear lluvia de corazones
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
