@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para ti ❤️</title>
+    <title>Para Millita ❤️</title>
     <style>
         body {
             display: flex;
@@ -11,17 +11,59 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #ffe6e6; /* Fondo rosa suave */
+            background-color: #ffe6e6;
             font-family: 'Arial', sans-serif;
             flex-direction: column;
             text-align: center;
-            overflow: hidden; /* Evita barras de desplazamiento si el botón se mueve mucho */
+            overflow: hidden;
+            position: relative; /* Necesario para las fotos de las esquinas */
         }
+
+        /* --- ESTILOS NUEVOS PARA LAS FOTOS --- */
+        .corner-photo {
+            position: absolute;
+            width: 130px; /* Tamaño de las fotos */
+            height: auto;
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 3px solid white;
+            z-index: 1;
+        }
+
+        .top-left {
+            top: 30px;
+            left: 30px;
+            transform: rotate(-8deg); /* Un pequeño giro para que se vea estilo polaroid */
+        }
+
+        .top-right {
+            top: 30px;
+            right: 30px;
+            transform: rotate(8deg);
+        }
+
+        /* Ajuste para celulares pequeños: hace las fotos más chicas para que no estorben */
+        @media (max-width: 600px) {
+            .corner-photo {
+                width: 90px;
+                top: 15px;
+            }
+            .top-left { left: 15px; }
+            .top-right { right: 15px; }
+        }
+        /* ------------------------------------ */
 
         h1 {
             color: #d63384;
             font-size: 2.5rem;
             margin-bottom: 20px;
+            padding: 0 15px;
+            z-index: 2;
+        }
+
+        #main-content {
+            z-index: 2; /* Para que el texto y botones queden sobre las fotos si se cruzan */
+            position: relative;
         }
 
         .container {
@@ -53,10 +95,9 @@
             background-color: #ffffff;
             color: #ff4d6d;
             border: 2px solid #ff4d6d;
-            position: relative; /* Necesario para moverlo */
+            position: relative;
         }
 
-        /* Estilo para el mensaje final */
         .hidden {
             display: none;
         }
@@ -65,6 +106,12 @@
             color: #d63384;
             font-size: 2rem;
             animation: popIn 0.5s ease;
+            z-index: 10;
+        }
+        
+        #message p {
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         @keyframes popIn {
@@ -72,7 +119,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Corazones flotantes (opcional) */
         .heart {
             position: absolute;
             color: #ff4d6d;
@@ -88,10 +134,15 @@
 </head>
 <body>
 
+    <img src="https://via.placeholder.com/150/ffcccb/d63384?text=Foto+Aqui" alt="Nosotros Izquierda" class="corner-photo top-left">
+    
+    <img src="https://via.placeholder.com/150/ffcccb/d63384?text=Foto+Aqui" alt="Nosotros Derecha" class="corner-photo top-right">
+
+
     <div id="main-content">
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3R6eW55b2E4aHl4YjJ6YjJ6YjJ6YjJ6YjJ6YjJ6YjJ6eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0ThflsHCqDrG/giphy.gif" alt="Cute Gif" style="width: 200px; border-radius: 15px; margin-bottom: 20px;">
         
-        <h1>bb quieres ser mi 14 de febrero? 🥺👉👈</h1>
+        <h1>millita hermosa quieres ser mi 14 de febrero? 🥺👉👈</h1>
         
         <div class="container">
             <button id="yesBtn">¡Sí, obvio! 😍</button>
@@ -101,7 +152,7 @@
 
     <div id="message" class="hidden">
         <h1>¡Sabía que dirías que sí! 💖🌹</h1>
-        <p>Te quiero mucho bb</p>
+        <p>Te amo infinito bb</p>
         <img src="https://media.giphy.com/media/T86i6yDyOYz7J6v9uh/giphy.gif" alt="Celebration" style="width: 250px; border-radius: 15px;">
     </div>
 
@@ -110,29 +161,29 @@
         const noBtn = document.getElementById('noBtn');
         const mainContent = document.getElementById('main-content');
         const message = document.getElementById('message');
+        // Seleccionamos también las fotos para ocultarlas al final si quieres (opcional)
+        const cornerPhotos = document.querySelectorAll('.corner-photo');
 
-        // Función para mover el botón "No" aleatoriamente
+
         const moveButton = () => {
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
             noBtn.style.position = 'absolute';
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
         };
 
-        // Evento cuando intentan hacer click o pasar el mouse sobre "No"
         noBtn.addEventListener('mouseover', moveButton);
-        noBtn.addEventListener('click', moveButton); // Por si están en celular
+        noBtn.addEventListener('click', moveButton);
 
-        // Evento cuando dicen que sí
         yesBtn.addEventListener('click', () => {
             mainContent.classList.add('hidden');
+            // Si quieres que las fotos de las esquinas desaparezcan al aceptar, descomenta la siguiente línea:
+            // cornerPhotos.forEach(photo => photo.classList.add('hidden'));
             message.classList.remove('hidden');
             createHearts();
         });
 
-        // Función decorativa para crear lluvia de corazones
         function createHearts() {
             setInterval(() => {
                 const heart = document.createElement('div');
@@ -141,10 +192,7 @@
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.animationDuration = Math.random() * 2 + 3 + 's';
                 document.body.appendChild(heart);
-                
-                setTimeout(() => {
-                    heart.remove();
-                }, 5000);
+                setTimeout(() => { heart.remove(); }, 5000);
             }, 300);
         }
     </script>
