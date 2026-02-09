@@ -21,38 +21,41 @@
             position: relative;
         }
 
-        /* --- FOTOS DE ESQUINAS --- */
+        /* --- FOTOS DE ESQUINAS MÁS GRANDES --- */
         .corner-photo {
             position: absolute;
-            width: 200px;
+            /* AUMENTADO DE 200px A 260px */
+            width: 260px; 
             height: auto;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            border: 4px solid white;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+            border: 5px solid white;
             z-index: 1;
         }
 
         .top-left {
-            top: 20px;
-            left: 20px;
+            top: 15px;
+            left: 15px;
             transform: rotate(-8deg); 
         }
 
         .top-right {
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             transform: rotate(8deg);
         }
 
-        @media (max-width: 600px) {
+        /* Ajuste para celulares más grandes también */
+        @media (max-width: 768px) {
             .corner-photo {
-                width: 140px;
-                top: 15px;
-                border-width: 2px;
+                /* AUMENTADO DE 140px A 180px EN CELULAR */
+                width: 180px;
+                top: 10px;
+                border-width: 3px;
             }
-            .top-left { left: 10px; }
-            .top-right { right: 10px; }
-            h1 { font-size: 2rem; }
+            .top-left { left: 5px; }
+            .top-right { right: 5px; }
+            h1 { font-size: 1.8rem; } /* Texto un poco más chico en cel para dar espacio a las fotos */
         }
 
         h1 {
@@ -67,10 +70,11 @@
         #main-content {
             z-index: 2; 
             position: relative;
-            background-color: rgba(255, 255, 255, 0.3);
-            padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(2px);
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 35px;
+            border-radius: 25px;
+            backdrop-filter: blur(3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .container {
@@ -120,15 +124,20 @@
             z-index: 10;
             width: 90%;
             max-width: 600px;
+            /* Fondo para que se lea bien sobre las fotos grandes */
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
         }
         
         #message h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 10px;
         }
 
         #message p.main-text {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: #d63384;
             margin: 0 0 20px 0;
@@ -136,22 +145,22 @@
 
         /* --- ESTILO DE LA NOTITA --- */
         .sticky-note {
-            background-color: #fff740; /* Color amarillo post-it */
+            background-color: #fff740;
             color: #4a4a4a;
             padding: 20px;
-            width: 80%;
-            max-width: 350px;
+            width: 85%;
+            max-width: 380px;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
-            transform: rotate(-2deg); /* Inclinación natural */
-            font-family: 'Indie Flower', cursive; /* Fuente manuscrita */
+            transform: rotate(-2deg);
+            font-family: 'Indie Flower', cursive;
             font-size: 1.4rem;
             line-height: 1.4;
             margin: 10px auto 20px auto;
             border-radius: 2px;
             position: relative;
+            border: 1px solid #e8e035;
         }
         
-        /* Efecto de cinta adhesiva (opcional, visual) */
         .sticky-note::after {
             content: '';
             position: absolute;
@@ -162,11 +171,6 @@
             height: 15px;
             background-color: rgba(255,255,255,0.4);
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
         }
 
         .heart {
@@ -206,7 +210,7 @@
             "Sé que será un 14 distinto yendo a un matrimonio, pero lo lindo de ese día es poder pasarlo contigo ya que tú eres mi vida."
         </div>
 
-        <img src="https://media.giphy.com/media/T86i6yDyOYz7J6v9uh/giphy.gif" alt="Celebration" style="width: 250px; border-radius: 15px;">
+        <img src="https://media.giphy.com/media/T86i6yDyOYz7J6v9uh/giphy.gif" alt="Celebration" style="width: 220px; border-radius: 15px;">
     </div>
 
     <script>
@@ -216,14 +220,15 @@
         const message = document.getElementById('message');
 
         const moveButton = () => {
-            const maxWidth = window.innerWidth - noBtn.offsetWidth - 20;
-            const maxHeight = window.innerHeight - noBtn.offsetHeight - 20;
-            const x = Math.max(10, Math.random() * maxWidth);
-            const y = Math.max(10, Math.random() * maxHeight);
+            const maxWidth = window.innerWidth - noBtn.offsetWidth - 30;
+            const maxHeight = window.innerHeight - noBtn.offsetHeight - 30;
+            const x = Math.max(15, Math.random() * maxWidth);
+            const y = Math.max(15, Math.random() * maxHeight);
             
             noBtn.style.position = 'absolute';
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
+            noBtn.style.zIndex = '4'; // Asegura que el botón NO se mueva sobre las fotos
         };
 
         noBtn.addEventListener('touchstart', moveButton);
@@ -242,12 +247,12 @@
                 heart.classList.add('heart');
                 heart.innerHTML = ['❤️', '💖', '💘', '💝'][Math.floor(Math.random() * 4)];
                 heart.style.left = Math.random() * 100 + 'vw';
-                const size = Math.random() * 20 + 15;
+                const size = Math.random() * 25 + 15;
                 heart.style.fontSize = `${size}px`;
                 heart.style.animationDuration = Math.random() * 3 + 2 + 's';
                 document.body.appendChild(heart);
                 setTimeout(() => { heart.remove(); }, 5000);
-            }, 80);
+            }, 70);
         }
     </script>
 </body>
