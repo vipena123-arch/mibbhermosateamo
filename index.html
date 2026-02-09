@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Millita ❤️</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
         body {
             display: flex;
             justify-content: center;
@@ -19,115 +21,166 @@
             position: relative;
         }
 
-        /* FOTOS DE LAS ESQUINAS */
+        /* --- FOTOS DE ESQUINAS --- */
         .corner-photo {
             position: absolute;
-            width: 130px; 
+            width: 200px;
             height: auto;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            border: 3px solid white;
+            border: 4px solid white;
             z-index: 1;
         }
 
         .top-left {
-            top: 30px;
-            left: 30px;
+            top: 20px;
+            left: 20px;
             transform: rotate(-8deg); 
         }
 
         .top-right {
-            top: 30px;
-            right: 30px;
+            top: 20px;
+            right: 20px;
             transform: rotate(8deg);
         }
 
-        /* Ajuste para celulares */
         @media (max-width: 600px) {
             .corner-photo {
-                width: 90px;
+                width: 140px;
                 top: 15px;
+                border-width: 2px;
             }
-            .top-left { left: 15px; }
-            .top-right { right: 15px; }
+            .top-left { left: 10px; }
+            .top-right { right: 10px; }
+            h1 { font-size: 2rem; }
         }
 
         h1 {
             color: #d63384;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
             padding: 0 15px;
             z-index: 2;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
         }
 
         #main-content {
             z-index: 2; 
             position: relative;
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(2px);
         }
 
         .container {
             position: relative;
+            z-index: 3;
         }
 
         button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            padding: 15px 35px;
+            font-size: 1.3rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            margin: 10px;
+            margin: 15px;
             transition: all 0.3s ease;
+            font-weight: bold;
         }
 
         #yesBtn {
             background-color: #ff4d6d;
             color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
         }
 
         #yesBtn:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) translateY(-3px);
             background-color: #e60026;
+            box-shadow: 0 6px 20px rgba(230, 0, 38, 0.6);
         }
 
         #noBtn {
             background-color: #ffffff;
             color: #ff4d6d;
-            border: 2px solid #ff4d6d;
+            border: 3px solid #ff4d6d;
             position: relative;
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
         
         #message {
-            color: #d63384;
-            font-size: 2rem;
-            animation: popIn 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             z-index: 10;
+            width: 90%;
+            max-width: 600px;
         }
         
-        #message p {
-            font-size: 1.5rem;
+        #message h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        #message p.main-text {
+            font-size: 1.8rem;
             font-weight: bold;
+            color: #d63384;
+            margin: 0 0 20px 0;
+        }
+
+        /* --- ESTILO DE LA NOTITA --- */
+        .sticky-note {
+            background-color: #fff740; /* Color amarillo post-it */
+            color: #4a4a4a;
+            padding: 20px;
+            width: 80%;
+            max-width: 350px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            transform: rotate(-2deg); /* Inclinación natural */
+            font-family: 'Indie Flower', cursive; /* Fuente manuscrita */
+            font-size: 1.4rem;
+            line-height: 1.4;
+            margin: 10px auto 20px auto;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        /* Efecto de cinta adhesiva (opcional, visual) */
+        .sticky-note::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 15px;
+            background-color: rgba(255,255,255,0.4);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         @keyframes popIn {
-            0% { transform: scale(0); }
-            100% { transform: scale(1); }
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .heart {
             position: absolute;
             color: #ff4d6d;
             animation: float 4s linear infinite;
-            font-size: 20px;
+            font-size: 25px;
+            z-index: 5;
         }
 
         @keyframes float {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-100vh); opacity: 0; }
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -137,8 +190,6 @@
     <img src="foto2.jpg" alt="Nosotros Derecha" class="corner-photo top-right">
 
     <div id="main-content">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3R6eW55b2E4aHl4YjJ6YjJ6YjJ6YjJ6YjJ6YjJ6YjJ6eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0ThflsHCqDrG/giphy.gif" alt="Cute Gif" style="width: 200px; border-radius: 15px; margin-bottom: 20px;">
-        
         <h1>millita hermosa quieres ser mi 14 de febrero? 🥺👉👈</h1>
         
         <div class="container">
@@ -149,7 +200,12 @@
 
     <div id="message" class="hidden">
         <h1>¡Sabía que dirías que sí! 💖🌹</h1>
-        <p>Te amo infinito bb</p>
+        <p class="main-text">Te amo infinito bb</p>
+        
+        <div class="sticky-note">
+            "Sé que será un 14 distinto yendo a un matrimonio, pero lo lindo de ese día es poder pasarlo contigo ya que tú eres mi vida."
+        </div>
+
         <img src="https://media.giphy.com/media/T86i6yDyOYz7J6v9uh/giphy.gif" alt="Celebration" style="width: 250px; border-radius: 15px;">
     </div>
 
@@ -160,13 +216,17 @@
         const message = document.getElementById('message');
 
         const moveButton = () => {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            const maxWidth = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxHeight = window.innerHeight - noBtn.offsetHeight - 20;
+            const x = Math.max(10, Math.random() * maxWidth);
+            const y = Math.max(10, Math.random() * maxHeight);
+            
             noBtn.style.position = 'absolute';
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
         };
 
+        noBtn.addEventListener('touchstart', moveButton);
         noBtn.addEventListener('mouseover', moveButton);
         noBtn.addEventListener('click', moveButton);
 
@@ -180,12 +240,14 @@
             setInterval(() => {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
-                heart.innerHTML = '❤️';
+                heart.innerHTML = ['❤️', '💖', '💘', '💝'][Math.floor(Math.random() * 4)];
                 heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                const size = Math.random() * 20 + 15;
+                heart.style.fontSize = `${size}px`;
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
                 document.body.appendChild(heart);
                 setTimeout(() => { heart.remove(); }, 5000);
-            }, 300);
+            }, 80);
         }
     </script>
 </body>
